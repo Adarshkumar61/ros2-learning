@@ -24,6 +24,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'first_node = basis_robot.first_node:main',
+            
         ],
     },
 )

@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'robot_ws'
+package_name = 'basis_robot'
 
 setup(
     name=package_name,

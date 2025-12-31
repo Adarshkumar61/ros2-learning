@@ -25,6 +25,8 @@ setup(
     entry_points={
         'console_scripts': [
             'first_node = basis_robot.first_node:main',
+            'talker = basis_robot.talker:main',
+            'listener = basis_robot.listener:main',
             
         ],
     },

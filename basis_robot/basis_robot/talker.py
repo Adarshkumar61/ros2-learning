@@ -5,11 +5,14 @@ from std_msgs.msg import String
 
 class talker(Node):
     def __init__(self):
-        super().__init__('talker node')
+        super().__init__('talker_node')
         self.get_logger().info('talker starting..')
 
-        #creating publisgher
-        self.publiser_ = self.create_publisher(String, 'chatter', 10)
+        #creating publisher
+        self.publisher_ = self.create_publisher(
+            String,
+            'chatter',
+            10)
         timer_sec = 0.5
 
         # creating timer
@@ -19,11 +22,11 @@ class talker(Node):
     #fn for publishing msg
     def publish_msg(self):
         msg = String()
-        msg.data = 'hello adarsh {self.count}'
+        msg.data = f'hello adarsh {self.count}'
         self.publisher_.publish(msg)
         
         #print log
-        self.get_logger().info('Publishing: {msg.data}')
+        self.get_logger().info(f'Publishing: {msg.data}')
         self.count += 1
 
 
@@ -36,3 +39,4 @@ def main(args = None):
 
 if __name__ == '__main__':
     main()
+

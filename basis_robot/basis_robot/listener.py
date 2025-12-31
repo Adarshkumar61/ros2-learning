@@ -7,7 +7,10 @@ class listener(Node):
         super().__init__('listener_node')
         self.get_logger().info('listener started..')
 
-        self.listener = self.create_subscription(
+        self.listener = self.create_subscription( #create_subscription(...)
+                                        #Subscribes to topic 'chatter'
+                                        #Whenever a message arrives → callback() runs
+
             String,
             'chatter',
             self.call_back,

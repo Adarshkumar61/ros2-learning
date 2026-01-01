@@ -27,8 +27,8 @@ setup(
             'first_node = basis_robot.first_node:main',
             'talker = basis_robot.talker:main',
             'listener = basis_robot.listener:main',
-            'parameter_node = basis_robot.parameter_node:main',
-            
+            'parameter = basis_robot.parameter:main',
+
         ],
     },
 )

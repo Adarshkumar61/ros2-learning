@@ -28,7 +28,7 @@ class MyParamNode(Node):
         for param in params:
 
             if param.name == 'robot_speed':
-                if param.value <= 0:
+                if param.value < 0:
                     self.get_logger().error("robot_speed must be > 0")
                     return SetParametersResult(successful=False)
 

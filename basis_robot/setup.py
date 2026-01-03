@@ -29,6 +29,7 @@ setup(
             'listener = basis_robot.listener:main',
             'parameter = basis_robot.parameter:main',
             'myparamnode = basis_robot.parameter2:main',
+            'robotspeed = basis_robot.parameter3:main',
 
         ],
     },

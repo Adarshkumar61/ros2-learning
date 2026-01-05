@@ -33,6 +33,8 @@ setup(
             'myparamnodee = basis_robot.parameter4:main',
             'service_server = basis_robot.service_server:main',
             'service_client = basis_robot.service_client:main',
+            'service_add = basis_robot.service_add_two_int:main',
+            'client_add = basis_robot.client_add_two_int:main'
 
         ],
     },

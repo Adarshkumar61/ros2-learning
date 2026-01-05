@@ -30,6 +30,9 @@ setup(
             'parameter = basis_robot.parameter:main',
             'myparamnode = basis_robot.parameter2:main',
             'robotspeed = basis_robot.parameter3:main',
+            'myparamnodee = basis_robot.parameter4:main',
+            'service_server = basis_robot.service_server:main',
+            'service_client = basis_robot.service_client:main',
 
         ],
     },

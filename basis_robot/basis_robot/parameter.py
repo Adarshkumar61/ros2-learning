@@ -45,5 +45,8 @@ if __name__ == '__main__':
 
 
 # to change parameter live :
+#syntax:
+# ros2 param set <node_name> <parameter_name> <new_value>
 # ros2 param set /param_example robot_speed 2.5
+
 

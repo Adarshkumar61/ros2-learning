@@ -35,7 +35,8 @@ setup(
             'service_client = basis_robot.service_client:main',
             'service_add = basis_robot.service_add_two_int:main',
             'client_add = basis_robot.client_add_two_int:main'
-
+            'action_server = basis_robot.action_server:main',
+            'action_client = basis_robot.action_client:main',
         ],
     },
 )

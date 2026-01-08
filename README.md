@@ -226,8 +226,8 @@ Hardware Integration
 <br/> <hr width="60%"/> </div> <div align="center">
 📬 CONNECT
 
-GitHub: (add link)
-LinkedIn: (optional)
+GitHub: (https://github.com/Adarshkumar61)
+LinkedIn: (https://www.linkedin.com/in/adarsh-kumar-94a859327/)
 
 <br/>
 

@@ -118,7 +118,8 @@ ros2 run basis_robot listener
 <div align="center">
 🖼 OUTPUT
 </div>
-![Topic Communication](images/topic_pub_sub.png)
+<p align="center"><img src="images/talker_output.png" width="600"></p>
+<p align="center"><img src="images/listener_output.png" width="600"></p>
 
 <div align="center">
 3️⃣ SERVICES (Client & Server)
@@ -139,7 +140,8 @@ ros2 run basis_robot service_client
 <div align="center">
 🖼 OUTPUT
 </div>
-![Service Output](images/service_output.png)
+<p align="center"><img src="images/service_server_output.png" width="500"></p>
+<p align="center"><img src="images/service_client_output.png" width="500"></p>
 
 <div align="center">
 4️⃣ PARAMETERS (Dynamic Configuration)
@@ -160,7 +162,7 @@ ros2 param set /myparamnode robot_speed 2.0
 <div align="center">
 🖼 OUTPUT
 </div>
-![Parameter Update](images/parameter_update.png)
+<p align="center"><img src="images/parameter_output.png" width="700"></p>
 
 <div align="center">
 5️⃣ ACTIONS ⭐ (Goal • Feedback • Result)
@@ -193,9 +195,10 @@ ros2 run basis_robot actionclient
 
 🖼 OUTPUT
 </div>
-![Action Feedback](images/action_feedback.png)
-![Action Result](images/action_result.png)
-
+<div>
+<p align="center"><img src="images/action_server_output.png" width="600"></p>
+<p align="center"><img src="images/action_client_output.png" width="600"></p>
+</div>
 <div align="center">
 🧪 BUILD & RUN
 </div>

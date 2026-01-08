@@ -98,7 +98,7 @@ ros2 run basis_robot first_node
 <div align="center">
 🖼 OUTPUT
 </div>
-![Node Output](images/first_node_output.png)
+<p align="center"><img src="images/first_node_output.png" width="700"></p>
 
 <div align="center">
 2️⃣ TOPICS (Publisher & Subscriber)

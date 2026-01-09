@@ -38,6 +38,8 @@ setup(
 
             'ActionServerNode = basis_robot.Action_Serverr:main',
             'ActionClientNode = basis_robot.action_client:main',
+            'robot_move_server = basis_robot.action_robot_move_server:main',
+            'robot_move_client = basis_robot.action_robot_move_client:main',
         ],
     },
 )

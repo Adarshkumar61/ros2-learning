@@ -13,7 +13,7 @@ class RobotMoveAS(Node):
             self,
             Fibonacci,
             'robot_move',
-            self.execute_callback
+            # self.execute_callback
         )
 
     def execute_callback(self, goal_handle):

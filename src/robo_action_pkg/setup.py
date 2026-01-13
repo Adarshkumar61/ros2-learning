@@ -25,6 +25,8 @@ setup(
         'test': ['pytest'],
     },
     entry_points={
-        'console_scripts': [],
+        'console_scripts': [
+            'move_robot_server = robo_action_pkg.action_server:main',
+        ],
     },
 )

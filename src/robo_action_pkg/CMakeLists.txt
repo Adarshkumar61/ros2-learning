@@ -7,6 +7,7 @@ find_package(action_msgs REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "action/MoveRobot.action"
+  DEPENDENCIES action_msgs
 )
 
 ament_export_dependencies(rosidl_default_runtime)

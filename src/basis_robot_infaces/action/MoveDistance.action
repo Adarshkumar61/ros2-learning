@@ -1,6 +1,0 @@
-float32 target_distance
----
-bool success
-float32 final_distance
----
-float32 current_distance

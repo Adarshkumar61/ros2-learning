@@ -40,6 +40,7 @@ setup(
             'ActionClientNode = basis_robot.action_client:main',
             'robot_move_server = basis_robot.action_robot_move_server:main',
             'robot_move_client = basis_robot.action_robot_move_client:main',
+            'fibonacci_action_server = robo_action_pkg.fibonacci_action_server:main',
         ],
     },
 )

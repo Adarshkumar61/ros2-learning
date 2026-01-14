@@ -20,13 +20,15 @@
   <exec_depend>rosidl_default_generators</exec_depend>
 
   <!-- ========= PYTHON RUNTIME ========= -->
-  <exec_depend>rclpy</exec_depend>
+
 
   <!-- ========= TESTING ========= -->
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
   <test_depend>ament_pep257</test_depend>
   <test_depend>python3-pytest</test_depend>
+  <depend>rclpy</depend>
+  <depend>custom_action_interfaces</depend>
 
   <!-- ========= EXPORTS ========= -->
   <export>

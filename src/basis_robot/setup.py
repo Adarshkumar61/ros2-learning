@@ -41,6 +41,7 @@ setup(
             'robot_move_server = basis_robot.action_robot_move_server:main',
             'robot_move_client = basis_robot.action_robot_move_client:main',
             'fibonacci_action_server = basis_robot.fibonacci_action_server:main',
+            'fibonacci_action_client = basis_robot.fibonacci_action_client:main',
         ],
     },
 )

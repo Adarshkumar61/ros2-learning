@@ -29,20 +29,22 @@ class FibonacciActionServer(Node):
         feedback = Fibonacci.Feedback()
         result = Fibonacci.Result()
 
-        feedback.sequence = [0, 1]
+        sequence = [0, 1]
+        feedback.partial_sequence = sequence.copy()
+        goal_handle.publish_feedback(feedback)
 
         for i in range(2, order):
-            feedback.sequence.append(
-                feedback.sequence[i-1] + feedback.sequence[i-2]
-            )
+            sequence.append(sequence[i-1] + sequence[i-2])
+            feedback.partial_sequence = sequence.copy()
             goal_handle.publish_feedback(feedback)
             time.sleep(1)
 
         goal_handle.succeed()
-        result.sequence = feedback.sequence
+        result.sequence = sequence
 
         self.get_logger().info('Fibonacci goal succeeded')
         return result
+
 
 
 def main(args=None):

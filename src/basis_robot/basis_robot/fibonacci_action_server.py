@@ -1,9 +1,7 @@
 import time
-
 import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionServer
-
 from custom_action_interfaces.action import Fibonacci
 
 

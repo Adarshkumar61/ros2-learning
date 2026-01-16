@@ -32,3 +32,20 @@
   </export>
 
 </package>
+
+<!-- #here is the code that gpt says this also work : will check and confirm:
+<package format="3">
+  <name>custom_action_interfaces</name>
+  <version>0.0.0</version>
+  <description>Custom action interfaces</description>
+
+  <maintainer email="you@email.com">you</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rosidl_default_generators</depend>
+  <depend>action_msgs</depend>
+  <exec_depend>rosidl_default_runtime</exec_depend>
+
+  <member_of_group>rosidl_interface_packages</member_of_group>
+</package> -->

@@ -46,8 +46,9 @@ class FibonacciActionClient(Node):
 
         self.get_logger().info('Goal accepted')
 
-        self._get_result_future = goal_handle.get_result_async()
-        self._get_result_future.add_done_callback(self.get_result_callback)
+        self.create_timer(3.0, self.cancel_goal)
+
+        self._goal_handle.get_result_async().add_done_callback(self.get_result_callback)
 
     def get_result_callback(self, future):
         result = future.result().result

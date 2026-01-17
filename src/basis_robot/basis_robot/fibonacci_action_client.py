@@ -31,6 +31,12 @@ class FibonacciActionClient(Node):
 
         self._send_goal_future.add_done_callback(self.goal_response_callback)
 
+    
+    def cancel_goal(self):
+        self.get_logger().info('Sending cancel request')
+        self._goal_handle.cancel_goal_async()
+
+
     def goal_response_callback(self, future):
         goal_handle = future.result()
 

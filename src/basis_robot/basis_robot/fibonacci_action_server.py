@@ -1,9 +1,6 @@
-import time
-
 import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionServer
-
 from custom_action_interfaces.action import Fibonacci
 
 
@@ -19,12 +16,14 @@ class FibonacciActionServer(Node):
             self.execute_callback
         )
 
-        self.get_logger().info('Fibonacci Action Server started')
+        self.get_logger().info('Fibonacci Action Server ready')
 
     def execute_callback(self, goal_handle):
-        self.get_logger().info(f'Received goal: order={goal_handle.request.order}')
+        self.get_logger().info(
+            f'Received goal: order={goal_handle.request.order}'
+        )
 
-        feedback_msg = Fibonacci.Feedback()
+        feedback = Fibonacci.Feedback()
         result = Fibonacci.Result()
 
         a, b = 0, 1
@@ -32,16 +31,23 @@ class FibonacciActionServer(Node):
 
         for i in range(goal_handle.request.order):
             sequence.append(a)
-            feedback_msg.partial_sequence = a
-            goal_handle.publish_feedback(feedback_msg)
+
+            feedback.partial_sequence = a
+            goal_handle.publish_feedback(feedback)
 
             self.get_logger().info(f'Feedback: {a}')
-            time.sleep(1)
+
+            # NON-BLOCKING delay (ROS-safe)
+            rclpy.spin_once(self, timeout_sec=1.0)
 
             a, b = b, a + b
 
+        # VERY IMPORTANT
         goal_handle.succeed()
+
         result.sequence = sequence
+        self.get_logger().info('Goal succeeded')
+
         return result
 
 
@@ -50,6 +56,5 @@ def main(args=None):
     node = FibonacciActionServer()
     rclpy.spin(node)
     rclpy.shutdown()
-
 if __name__ == '__main__':
     main()

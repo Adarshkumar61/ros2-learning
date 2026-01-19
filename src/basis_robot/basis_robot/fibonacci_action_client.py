@@ -58,3 +58,6 @@ def main(args=None):
     node = FibonacciActionClient()
     node.send_goal(10)
     rclpy.spin(node)
+
+if __name__ == '__main__':
+    main()

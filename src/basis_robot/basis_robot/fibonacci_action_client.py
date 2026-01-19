@@ -10,7 +10,7 @@ class FibonacciActionClient(Node):
     def __init__(self):
         super().__init__('fibonacci_action_client')
 
-        self._client = ActionClient(
+        self._action_client = ActionClient(
             self,
             Fibonacci,
             'fibonacci'
@@ -20,22 +20,16 @@ class FibonacciActionClient(Node):
         goal_msg = Fibonacci.Goal()
         goal_msg.order = order
 
-        self.get_logger().info(f'Sending goal: order={order}')
+        self.get_logger().info('Waiting for action server...')
+        self._action_client.wait_for_server()
 
-        self._client.wait_for_server()
-
-        self._send_goal_future = self._client.send_goal_async(
+        self.get_logger().info('Sending goal...')
+        self._send_goal_future = self._action_client.send_goal_async(
             goal_msg,
             feedback_callback=self.feedback_callback
         )
 
         self._send_goal_future.add_done_callback(self.goal_response_callback)
-
-    
-    def cancel_goal(self):
-        self.get_logger().info('Sending cancel request')
-        self._goal_handle.cancel_goal_async()
-
 
     def goal_response_callback(self, future):
         goal_handle = future.result()
@@ -45,27 +39,22 @@ class FibonacciActionClient(Node):
             return
 
         self.get_logger().info('Goal accepted')
-
-        self.create_timer(3.0, self.cancel_goal)
-
-        self._goal_handle.get_result_async().add_done_callback(self.get_result_callback)
-
-    def get_result_callback(self, future):
-        result = future.result().result
-        self.get_logger().info(f'Result: {list(result.sequence)}')
-        rclpy.shutdown()
+        self._get_result_future = goal_handle.get_result_async()
+        self._get_result_future.add_done_callback(self.result_callback)
 
     def feedback_callback(self, feedback_msg):
-        feedback = feedback_msg.feedback
-        self.get_logger().info(f'Feedback: {list(feedback.partial_sequence)}')
+        self.get_logger().info(
+            f'Feedback received: {feedback_msg.feedback.partial_sequence}'
+        )
+
+    def result_callback(self, future):
+        result = future.result().result
+        self.get_logger().info(f'Result: {result.sequence}')
+        rclpy.shutdown()
 
 
 def main(args=None):
     rclpy.init(args=args)
     node = FibonacciActionClient()
-    node.send_goal(order=10)
+    node.send_goal(10)
     rclpy.spin(node)
-
-
-if __name__ == '__main__':
-    main()

@@ -50,3 +50,6 @@ def main(args=None):
     node = FibonacciActionServer()
     rclpy.spin(node)
     rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()

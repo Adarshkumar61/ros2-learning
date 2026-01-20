@@ -20,8 +20,9 @@ class FibonacciActionServer(Node):
 
     def execute_callback(self, goal_handle):
         self.get_logger().info(
+
             f'Received goal: order={goal_handle.request.order}'
-        )
+    )
 
         feedback = Fibonacci.Feedback()
         result = Fibonacci.Result()
@@ -32,23 +33,19 @@ class FibonacciActionServer(Node):
         for i in range(goal_handle.request.order):
             sequence.append(a)
 
-            feedback.partial_sequence = a
+        
+            feedback.partial_sequence = sequence.copy()
             goal_handle.publish_feedback(feedback)
 
-            self.get_logger().info(f'Feedback: {a}')
+            self.get_logger().info(f'Feedback: {sequence}')
 
-            # NON-BLOCKING delay (ROS-safe)
-            rclpy.spin_once(self, timeout_sec=1.0)
-
+            rclpy.spin_once(self, timeout_sec=0.5)
             a, b = b, a + b
 
-        # VERY IMPORTANT
         goal_handle.succeed()
-
         result.sequence = sequence
-        self.get_logger().info('Goal succeeded')
-
         return result
+
 
 
 def main(args=None):

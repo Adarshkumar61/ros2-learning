@@ -17,11 +17,11 @@ class FibonacciActionServer(Node):
         )
 
         self.get_logger().info('Fibonacci Action Server ready')
-
+    #Function to run when a goal is received
     def execute_callback(self, goal_handle):
         self.get_logger().info(
 
-            f'Received goal: order={goal_handle.request.order}'
+            f'Received goal: order={goal_handle.request.order}'#This comes from: int32 order
     )
 
         feedback = Fibonacci.Feedback()
@@ -35,11 +35,15 @@ class FibonacciActionServer(Node):
 
         
             feedback.partial_sequence = sequence.copy()
+            #.copy():To avoid: Reference issues Data being modified unexpectedly
             goal_handle.publish_feedback(feedback)
 
             self.get_logger().info(f'Feedback: {sequence}')
 
             rclpy.spin_once(self, timeout_sec=0.5)
+            #This allows:ROS communication to process  Feedback to actually be sent
+            #Without spinning:F eedback may never reach clientThink of it as:
+            # Give ROS time to breathe.
             a, b = b, a + b
 
         goal_handle.succeed()

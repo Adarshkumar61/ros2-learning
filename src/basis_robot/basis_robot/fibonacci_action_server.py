@@ -18,6 +18,11 @@ class FibonacciActionServer(Node):
 
         self.get_logger().info('Fibonacci Action Server ready')
     #Function to run when a goal is received
+    #execute_callback() must:
+    # Read goal
+    # Send feedback (optional)
+    # Call goal_handle.succeed()
+    # Return result
     def execute_callback(self, goal_handle):
         self.get_logger().info(
 

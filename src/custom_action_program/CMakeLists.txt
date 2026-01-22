@@ -13,7 +13,7 @@ find_package(action_msgs REQUIRED)
 
 # Generate action interfaces
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "action/fibo.action"
+  "action/Fibo.action"
   DEPENDENCIES action_msgs
 )
 

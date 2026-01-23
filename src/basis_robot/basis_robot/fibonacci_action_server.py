@@ -35,8 +35,8 @@ class FibonacciActionServer(Node):
 
         a, b = 0, 1
         sequence = []
-
-        for i in range(goal_handle.request.order):
+        timeout_sec = 0.5
+        for i in range(order):
             sequence.append(a)
 
         
@@ -46,7 +46,7 @@ class FibonacciActionServer(Node):
 
             self.get_logger().info(f'Feedback: {sequence}')
 
-            rclpy.spin_once(self, timeout_sec=0.5)
+            rclpy.spin_once(self, timeout_sec=timeout_sec)
             #This allows:ROS communication to process  Feedback to actually be sent
             #Without spinning:F eedback may never reach clientThink of it as:
             # Give ROS time to breathe.

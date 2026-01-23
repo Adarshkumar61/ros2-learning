@@ -24,9 +24,10 @@ class FibonacciActionServer(Node):
     # Call goal_handle.succeed()
     # Return result
     def execute_callback(self, goal_handle):
+        order = goal_handle.request.order
         self.get_logger().info(
 
-            f'Received goal: order={goal_handle.request.order}'#This comes from: int32 order
+            f'Received goal: order={order}'#This comes from: int32 order
     )
 
         feedback = Fibonacci.Feedback()

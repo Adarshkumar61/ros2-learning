@@ -1,0 +1,5 @@
+int32 num_waypoints
+---
+bool success
+---
+int32 current_waypoint

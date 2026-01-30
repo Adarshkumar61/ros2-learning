@@ -17,4 +17,9 @@
   <!-- Nodes we will launch -->
   <exec_depend>basis_robot</exec_depend>
 
+  <!-- 🔴 THIS IS WHAT YOU WERE MISSING -->
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+
 </package>

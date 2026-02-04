@@ -79,3 +79,85 @@ from rclpy.node import Node
 from rclpy.action import ActionServer
 from patrol_robot.action import Patrol
 
+class PatrolActionServer(Node):
+    def __init__(self):
+        super().__init__('patrol_action_server')
+
+        self._action_server = ActionServer(
+            self,
+            Patrol,
+            'patrol',
+            self.execute_callback
+        )
+
+        self.state = 'IDLE🤖'
+        self.current_waypoint = 0
+        self.total_waypoints = 0
+        goal_handle = None
+
+        self.timer = self.create_timer(1.0, self.timer_callback)
+
+        self.get_logger().info('Patrol Action Server is up and running...')
+
+    def execute_callback(self, goal_handle):
+        goal = goal_handle.request.num_waypoints
+        self.get_logger().info(f'Received patrol request with {goal} waypoints')
+
+        # self.state = 'PATROLLING🚶‍♂️'
+        self.goal_handle = goal_handle
+        self.total_waypoints = goal
+        self.current_waypoint = 0
+
+        self.state = 'PATROLLING 🚶‍♂️'
+
+        while self.state != 'DONE':
+            rclpy.spin_once(self)
+
+        
+        #result 
+        result = Patrol.Result()
+        result.success = True
+        goal_handle.succeed()
+        self.get_logger().info('Patrol completed successfully')
+        return result
+    
+    def timer_callback(self):
+
+        if self.state == "IDLE":
+            return
+
+        self.get_logger().info(f"[STATE] → {self.state}")
+
+        if self.state == "MOVING":
+
+            if self.goal_handle.is_cancel_requested:
+                self.goal_handle.canceled()
+                self.state = "IDLE"
+                return
+
+            self.current_waypoint += 1
+
+            feedback = Patrol.Feedback()
+            feedback.current_waypoint = self.current_waypoint
+            self.goal_handle.publish_feedback(feedback)
+
+            self.get_logger().info(
+                f"Reached waypoint {self.current_waypoint}"
+            )
+
+            self.state = "WAITING"
+
+        elif self.state == "WAITING":
+            self.get_logger().info("Pausing at waypoint...")
+            self.state = "CHECK_DONE"
+
+        elif self.state == "CHECK_DONE":
+
+            if self.current_waypoint >= self.total_waypoints:
+                self.state = "DONE"
+            else:
+                self.state = "MOVING"
+
+        elif self.state == "DONE":
+            pass
+

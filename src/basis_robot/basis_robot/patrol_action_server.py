@@ -161,3 +161,37 @@ class PatrolActionServer(Node):
         elif self.state == "DONE":
             pass
 
+def main(args = None):
+    rclpy.init(args= args)
+    node = PatrolActionServer()
+    rclpy.spin(node)
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
+
+"""
+             +--------+
+             |  IDLE  |
+             +--------+
+                 |
+                 v
+             +---------+
+             | MOVING  |
+             +---------+
+                 |
+                 v
+             +----------+
+             | WAITING  |
+             +----------+
+                 |
+                 v
+           +--------------+
+           | CHECK_DONE   |
+           +--------------+
+            |          |
+            |          |
+            v          v
+         DONE       MOVING
+
+"""

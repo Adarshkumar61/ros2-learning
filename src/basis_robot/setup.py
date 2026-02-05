@@ -44,6 +44,7 @@ setup(
             'fibonacci_action_client = basis_robot.fibonacci_action_client:main',
             'patrol_action_server = basis_robot.patrol_action_server:main',
             'patrol_action_client = basis_robot.patrol_action_client:main',
+            'patrol_action_odometry_server = basis_robot.Patrol_Action_Server_with_Odometory:main',
         ],
     },
 )

@@ -88,6 +88,10 @@ class PatrolActionServer(Node):
     # TIMER (robot heartbeat)
     # --------------------------------------------------
     def timer_callback(self):
+        if self.current_waypoint >= self.total_waypoints:
+            self.state = "DONE"
+            return
+
 
         if self.state == "IDLE":
             return

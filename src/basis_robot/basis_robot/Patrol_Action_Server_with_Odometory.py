@@ -1,12 +1,12 @@
 import rclpy
+import math
 from rclpy.node import Node
 from rclpy.action import ActionServer
-
 from patrol_robot.action import Patrol
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Twist
 
-import math
+
 
 
 class PatrolActionServer(Node):
@@ -47,9 +47,8 @@ class PatrolActionServer(Node):
 
         self.get_logger().info("Headless Patrol Robot Started")
 
-    # --------------------------------------------------
     # ACTION GOAL
-    # --------------------------------------------------
+    
     def execute_callback(self, goal_handle):
 
         self.goal_handle = goal_handle
@@ -66,27 +65,25 @@ class PatrolActionServer(Node):
 
         return result
 
-    # --------------------------------------------------
+
     # DISTANCE
-    # --------------------------------------------------
+    
     def distance_to_goal(self, gx, gy):
         return math.sqrt(
-            (gx - self.current_x) ** 2 +
-            (gy - self.current_y) ** 2
-        )
+            (gx - self.current_x) ** 2 + (gy - self.current_y) ** 2)
 
-    # --------------------------------------------------
+
     # PUBLISH FAKE ODOM
-    # --------------------------------------------------
+
     def publish_odom(self):
         msg = Odometry()
         msg.pose.pose.position.x = self.current_x
         msg.pose.pose.position.y = self.current_y
         self.odom_pub.publish(msg)
 
-    # --------------------------------------------------
+
     # TIMER (robot heartbeat)
-    # --------------------------------------------------
+  
     def timer_callback(self):
         if self.current_waypoint >= self.total_waypoints:
             self.state = "DONE"
@@ -126,7 +123,7 @@ class PatrolActionServer(Node):
             if self.current_waypoint >= self.total_waypoints:
                 self.state = "DONE"
 
-    # --------------------------------------------------
+  
 def main(args=None):
     rclpy.init(args=args)
     node = PatrolActionServer()

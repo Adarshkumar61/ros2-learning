@@ -60,6 +60,9 @@ class OdometryNode(Node):
         self.x += self.v * math.cos(self.theta) * dt
         self.y += self.v * math.sin(self.theta) * dt
         self.theta += self.omega * dt
+        #Rotation happens because theta changes, not because omega exists.
+        #Omega just controls how theta changes.
+        # #But if you manually change theta, you’re forcing rotation.
 
         # Create Odometry message
         odom_msg = Odometry()
@@ -132,7 +135,143 @@ if __name__ == '__main__':
 # """ 
 
 
+"""
 
+question : If:
+
+v = 2
+omega = 0
+theta = π/2
+
+Is robot rotating?
+
+Is robot moving?
+
+Will x increase or y increase?
+
+Will quaternion change over time?
+
+now understand the answer:
+
+v = 2 → robot is moving forward at speed 2 m/s
+omega = 0 → robot is not rotating (no angular velocity)
+theta = π/2 → robot is facing 90 degrees (facing "up" in 2D plane)
+ 
+theta = pi/2
+x = 0 + 2 * cos(pi/2) * dt = 0 (cos(pi/2) = 0)
+y = 0 + 2 * sin(pi/2) * dt = 2 * dt (sin(pi/2) = 1)
+means : x will not increase (stays at 0)
+y will increase (moves up)
+
+
+
+
+rule :
+Facing right → x increases
+Facing left → x decreases
+Facing up → y increases
+Facing down → y decreases
+
+
+
+
+question : theta = -π/2
+v = 4
+omega = 0
+
+
+theta = -π/2
+v = 4
+omega = 0
+Step 1 — Is robot rotating?
+
+omega = 0
+So:
+
+✔ Robot is NOT rotating.
+
+Correct.
+
+Step 2 — What does theta = -π/2 mean?
+
+First remember the circle:
+
+0 → facing +X
+
++π/2 → facing +Y
+
+π → facing -X
+
+-π/2 → facing -Y
+
+So:
+
+theta = -π/2
+
+Means robot is facing negative Y direction (downwards).
+
+The minus sign just means clockwise rotation.
+
+Nothing scary.
+
+Step 3 — Apply Motion Equations
+𝑥
++
+=
+𝑣
+⋅
+𝑐
+𝑜
+𝑠
+(
+𝜃
+)
+⋅
+𝑑
+𝑡
+x+=v⋅cos(θ)⋅dt
+𝑦
++
+=
+𝑣
+⋅
+𝑠
+𝑖
+𝑛
+(
+𝜃
+)
+⋅
+𝑑
+𝑡
+y+=v⋅sin(θ)⋅dt
+
+Now plug theta = -π/2:
+
+We know:
+
+cos(-π/2) = 0
+
+sin(-π/2) = -1
+
+So:
+
+✅ Final Answer
+
+✔ Robot not rotating
+✔ Robot moving
+✔ X does not change
+✔ Y decreases
+
+          +Y
+           ↑
+           |
+ -X ← ---- 0 ---- → +X
+           |
+           ↓
+          -Y
+
+"""
 
 
 

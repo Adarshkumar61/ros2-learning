@@ -1,41 +1,41 @@
-import rclpy
-from rclpy.node import Node
-from std_msgs.msg import String
+# import rclpy
+# from rclpy.node import Node
+# from std_msgs.msg import String
 
-class listener(Node):
-    def __init__(self):
-        super().__init__('listener_node')
-        self.get_logger().info('listener started..')
+# class listener(Node):
+#     def __init__(self):
+#         super().__init__('listener_node')
+#         self.get_logger().info('listener started..')
 
-        self.listener = self.create_subscription( #create_subscription(...)
-                                        #Subscribes to topic 'chatter'
-                                        #Whenever a message arrives → callback() runs
+#         self.listener = self.create_subscription( #create_subscription(...)
+#                                         #Subscribes to topic 'chatter'
+#                                         #Whenever a message arrives → callback() runs
 
-            String,
-            'chatter',
-            self.call_back,
-            10,
-            """That 10 is the QoS depth (queue size).
-            Meaning:If subscriber is slow,
-            ROS2 can store up to 10 messages in queue.
-            After that:Old messages get dropped.
-            Think like:
-            Publisher is fast.
-            Subscriber is slow.
-            Queue prevents immediate data loss.
-            This is part of QoS (Quality of Service).=
-            And QoS is VERY important in robotics."""
-        )
+#             String,
+#             'chatter',
+#             self.call_back,
+#             10
+#             # """That 10 is the QoS depth (queue size).
+#             # Meaning:If subscriber is slow,
+#             # ROS2 can store up to 10 messages in queue.
+#             # After that:Old messages get dropped.
+#             # Think like:
+#             # Publisher is fast.
+#             # Subscriber is slow.
+#             # Queue prevents immediate data loss.
+#             # This is part of QoS (Quality of Service).=
+#             # And QoS is VERY important in robotics."""
+#         )
         
-    def call_back(self, msg):
-        self.get_logger().info(f'i recieved: {msg.data}')
+#     def call_back(self, msg):
+#         self.get_logger().info(f'i recieved: {msg.data}')
 
 
-def main(args = None):
-    rclpy.init(args=args)
-    node = listener()
-    rclpy.spin(node)
-    rclpy.shutdown()
+# def main(args = None):
+#     rclpy.init(args=args)
+#     node = listener()
+#     rclpy.spin(node)
+#     rclpy.shutdown()
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()

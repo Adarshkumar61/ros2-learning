@@ -46,6 +46,7 @@ setup(
             'patrol_action_client = basis_robot.patrol_action_client:main',
             'patrol_action_odometry_server = basis_robot.Patrol_Action_Server_with_Odometory:main',
             'odometry_node = basis_robot.Odometry_node:main',
+            'dynamic_tf_broadcaster = basis_robot.dynamic_tf_broadcaster:main',
         ],
     },
 )

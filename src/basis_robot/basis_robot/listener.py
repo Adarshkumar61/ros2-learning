@@ -14,7 +14,17 @@ class listener(Node):
             String,
             'chatter',
             self.call_back,
-            10
+            10,
+            """That 10 is the QoS depth (queue size).
+            Meaning:If subscriber is slow,
+            ROS2 can store up to 10 messages in queue.
+            After that:Old messages get dropped.
+            Think like:
+            Publisher is fast.
+            Subscriber is slow.
+            Queue prevents immediate data loss.
+            This is part of QoS (Quality of Service).=
+            And QoS is VERY important in robotics."""
         )
         
     def call_back(self, msg):

@@ -39,3 +39,57 @@
 
 # if __name__ == '__main__':
 #     main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+import rclpy
+from rclpy.node import Node
+from geometry_msgs.msg import Twist
+
+
+class VelocitySubscriber(Node):
+
+    def __init__(self):
+        super().__init__('velocity_subscriber')
+
+        self.subscription = self.create_subscription(
+            Twist,
+            '/cmd_vel',
+            self.velocity_callback,
+            10
+        )
+
+        self.get_logger().info("Velocity Subscriber Started")
+
+    def velocity_callback(self, msg):
+        self.get_logger().info(
+            f"Received -> Linear.x: {msg.linear.x}, Angular.z: {msg.angular.z}"
+        )
+
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = VelocitySubscriber()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()
+
+
+
+
+
+

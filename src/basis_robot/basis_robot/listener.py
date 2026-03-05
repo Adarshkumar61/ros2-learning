@@ -66,7 +66,7 @@ class VelocitySubscriber(Node):
             Twist,
             '/cmd_vel',
             self.velocity_callback,
-            10
+            10 # QoS depth (queue size)
         )
 
         self.get_logger().info("Velocity Subscriber Started")

@@ -9,7 +9,7 @@ class Subscriber(Node):
             String,
             'chatter',
             self.listener_callback,
-            10            
+            10
         )
 
     def listener_callback(self, msg):
